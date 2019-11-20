@@ -3,6 +3,9 @@
 # April 2018
 # Version 1.0 
 
+# dependancies:
+library(calibrate) 
+
 ### Loading and preparing data
 data <- read.table("data.txt", header=T, row.names = 1, strings=F)
 
@@ -17,7 +20,7 @@ d <-dist(mydata, method = "euclidean") # distance matrix
 w <-dist(mydata, method = "Ward.D2") # distance matrix 
 
 ### Plot clustering 
-# Dendrogram
+# Dendrogram plot
 hcd = as.dendrogram(d)
 par(ann = F, xaxt="n", cex.lab = 1.25, col.lab = "#7C8071")
 plot(hcd, axes = F)
@@ -26,8 +29,8 @@ axis(side = 2, at = seq(0, 450, 50), col = "#F38630",
 mtext(seq(0, 450, 50), side = 2, at = seq(0, 450, 50), line = 1, 
       col = "#A38630", las = 2)
 
-# Multidimensional scale
-library(calibrate)
+# Multidimensional scaling plot
+# library(calibrate) is needed for function texty() to label points in scatter plot
 fit <- cmdscale(d, eig=TRUE, k=2)
 x <- fit$points[,1]
 y <- fit$points[,2]
